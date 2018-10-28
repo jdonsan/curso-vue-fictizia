@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <my-counter v-if="show"></my-counter>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.component('my-counter',{
+            template: '<button @click="counter += 1">{{ counter }}</button>',
+            
+            beforeCreate() {
+                console.log('1. Antes de la creación')
+            },
+
+            created() {
+                console.log('2. Se ha creado')
+            },
+
+            beforeMount() {
+                console.log('3. Antes de montarse')
+            },
+
+            mounted() {
+                console.log('4. Montado. Y tengo acceso al counter:', this.counter)
+            },
+            
+            beforeUpdate(a, b) {
+                console.log('5. Antes de la actualización. El counter es')
+            },
+
+            updated() {
+                console.log('6. Despues del update. El counter es', this.counter)
+            },
+
+            beforeDestroy() {
+                console.log('7. Antes del destroy', this.counter)
+            },
+
+            destroyed() {
+                console.log('8. Despues del destroy', this.counter)
+            },
+
+            data() {
+                return {
+                    counter: 100
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#my-app',
+            data() {
+                return {
+                    show: true
+                }
+            }
+        })
+    </script>
+</body>
+</html>

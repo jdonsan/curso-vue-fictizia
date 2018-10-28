@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <!-- v-if normal -->
+        <div v-if="show">
+            <h1>Me muestro!!</h1>
+        </div>
+        <h2 v-else>Se muestra el else!!</h2>
+
+        <!-- v-else-if -->
+        <h1 v-if="name === 'A'">Muestra A</h1>
+        <h1 v-else-if="name === 'B'">Muestra B</h1>
+        <h1 v-else>Muestra lo que sea</h1>
+
+        <!-- Condicional en bloque -->
+        <template v-if="show">
+            <h1>No tiene nod raiz</h1>
+            <h2>No tiene nod raiz</h2>
+        </template>
+
+        <!-- v-if vs v-show -->
+        <h1 v-if="show">If vs show</h1>
+        <h1 v-show="show">If vs show</h1>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.config.keyCodes.f1 = 112
+
+        const app = new Vue({
+            el: '#my-app',
+
+            data() {
+                return {
+                    show: true,
+                    name: 'A'
+                }
+            },
+
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

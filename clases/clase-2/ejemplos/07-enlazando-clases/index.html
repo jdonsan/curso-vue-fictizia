@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .no-dynamic {
+            background: grey;
+        }
+
+        .my-style {
+            border: 1px solid green;
+        }
+
+        .my-style-error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="my-app">
+
+        <!-- una clase estática -->
+       <input type="text" class="my-style">
+
+       <!-- uma clase estática y una dinámica en objeto -->
+       <input type="text" class="no-dynamic" :class="myStyles">
+
+       <!-- enlace de clases en formato array -->
+       <input type="text" :class="['no-dynamic', myStyles]">
+
+       <!-- enlace de estilos -->
+       <input type="text" :style="myCSS">
+
+       <my-counter class="mi-otra-clase"></my-counter>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.component('my-counter', {
+            template: '<button class="my-clase">{{ counter }}</button>',
+            data() {
+                return {
+                    counter: 0
+                }
+            }
+        })
+        const app = new Vue({
+            el: '#my-app',
+
+            data() {
+                return {
+                    myError: 'my-style',
+                    active: true,
+                    error: false,
+                    myStyles: { 'my-style': true, 'my-style-error': true },
+                    myCSS: { background: 'red' }
+                }
+            },
+
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

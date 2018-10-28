@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <!-- Ejecutar un expresion -->
+        <button v-on:click="counter += 1">{{ counter }}</button>
+
+        <!-- Ejecutar un método -->
+        <button v-on:click="onAdd">{{ counter }}</button>
+
+        <!-- Ejecutar un metodo con parametros-->
+        <button v-on:click="onAddWith(4)">{{ counter }}</button>
+        <button v-on:click="onAddWith(3)">{{ counter }}</button>
+
+        <!-- shorthand -->
+        <button @click="counter += 1">{{ counter }}</button>
+
+        <a href="http://as.com" @click.prevent="green">AS</a>
+        <input type="text" @keyup.space="green">
+        <input type="text" @keyup.up="green">
+        <input type="text" @keyup.f1="green">
+
+        <div @click.right.prevent="green">
+            <h1>Pulsa con el raton</h1>
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.config.keyCodes.f1 = 112
+
+        const app = new Vue({
+            el: '#my-app',
+
+            data() {
+                return {
+                    counter: 1
+                }
+            },
+
+            methods: {
+                onAdd() {
+                    this.counter += 1
+                },
+                
+                onAddWith(add) {
+                    this.counter += add
+                },
+
+                green() {
+                    alert('Hola')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

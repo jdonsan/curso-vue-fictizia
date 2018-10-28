@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <!-- for con item e index -->
+       <ul>
+           <li v-for="(student, index) in students" :key="index"> {{index }} {{ student.name }} - {{ student.note }}</li>
+       </ul>
+
+       <!-- Acceder a un objeto d eun array -->
+       <p> {{ students[who].name }} </p>
+
+       <!-- Iterar un objeto -->
+       <p v-for="(value, key) in student"> {{ key}}: {{ value }}</p>
+
+       <!-- Iterar un rango -->
+       <div>
+           <p v-for="i in 10" class="star">{{ i }}</p>
+       </div>
+
+       <!-- v-for con v-if -->
+       <ul>
+           <li v-for="student in students" v-if="student.note > 5">{{ student.name }} - {{ student.note }}</li>
+       </ul>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.config.keyCodes.f1 = 112
+
+        const app = new Vue({
+            el: '#my-app',
+
+            data() {
+                return {
+                    who: 0,
+                    students: [
+                        { name: 'Noe', note: 10 },
+                        { name: 'Manu', note: 10 },
+                        { name: 'Belén', note: 5 }
+                    ],
+                    student: {
+                        name: 'Carlos',
+                        lastname: 'Rodriguez',
+                        note: 10
+                    }
+                }
+            },
+
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

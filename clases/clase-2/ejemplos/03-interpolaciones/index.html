@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <!-- Interpolación simple -->
+        <h1>{{ name }}</h1>
+
+        <!-- Interpolando html -->
+        <div>{{ html }}</div>
+        <div v-html="html"></div>
+
+        <!-- enlace de atributos-->
+        <a v-bind:href="url">as.com</a>
+        <div v-bind:id="userId"></div>
+        <a :href="url">otra vez as.com</a>
+
+        <!-- enlace de expresiones-->
+        <h1>{{ 'Mi contador es:'  + (counter + 3) }}</h1>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#my-app',
+
+            data() {
+                return {
+                    name: 'Jose',
+                    html: '<h2>Esto es renderizado desde servidor</h2>',
+                    url: 'https://as.com',
+                    userId: '3243-2342-2344-3232',
+                    counter: 0
+                }
+            }
+        })
+    </script>
+</body>
+</html>
