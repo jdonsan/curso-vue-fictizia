@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <my-counter :counter-default="counterProp"></my-counter>
+        <my-counter :counter-default="5"></my-counter>
+        <my-counter :counter-default="7" :class-default="classDefault"></my-counter>
+        <my-counter :counter-default="13" is-disabled></my-counter>
+        <button @click="classDefault = 'yellow'">Cambiar color</button>
+        <button @click="counterProp += 1">Sumar</button>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.component('my-counter', {
+            template: '<button :class="classDefault" @click="counter += 1" :disabled="isDisabled">{{ counter }}</button>',
+         //   props: ['counterDefault', 'classDefault'],
+          /*  props: {
+                counterDefault: Number, 
+                classDefault: String
+            },*/
+            props: {
+                counterDefault: {
+                    type: Number,
+                    required: true
+                },
+                classDefault: {
+                    type: String,
+                    required:false,
+                    default: 'green'
+                },
+                isDisabled: Boolean
+
+            },
+            data() {
+                return {
+                    counter: this.counterDefault 
+                }
+            }
+        })
+        
+        const app = new Vue({
+            el: '#my-app',
+            data: {
+                classDefault: 'blue',
+                counterProp: 0
+            }
+        })
+    </script>
+</body>
+</html>

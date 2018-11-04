@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <navigation-link to="/course">
+            <p>Hola</p>
+            <p>Puedes pinchar aqui</p>
+        </navigation-link>
+
+        <navigation-link to="/course"></navigation-link>
+
+
+        <my-layout>
+            <h1 slot="header">Mi app</h1>
+            <p>Esto es mi app</p>
+
+            <template slot="footer">
+                <a href="http://vuejs.com">Acerca de</a>
+                <a  href="http://vuex.com">Acerca de vyuex</a>
+            </template>
+        </my-layout>
+
+        <my-list>
+            <my-list-item>lorem</my-list-item>
+            <my-list-item>lorem</my-list-item>
+            <my-list-item>lorem 2</my-list-item>
+            <my-list-item>lorem 4</my-list-item>
+            <my-list-item>lorem 6</my-list-item>
+        </my-list>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.component('navigation-link', {
+            template: `
+                <a :href="to">
+                    <slot>Esto por defecto</slot>
+                </a>
+            `,
+            props: {
+                to: String
+            }
+        })
+
+        Vue.component('my-layout', {
+            template: `
+                <div class="my-layout">
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+
+                    <main>
+                        <slot></slot>
+                    </main>
+
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                </div>
+            `
+        })
+
+        Vue.component('my-list', {
+            template: '<ul class="my-list"><slot></slot></ul>'
+        })
+
+        Vue.component('my-list-item', {
+            template: '<li class="my-list-item"><slot></slot></li>'
+        })
+
+        const app = new Vue({
+            el: '#my-app'
+        })
+    </script>
+</body>
+
+</html>

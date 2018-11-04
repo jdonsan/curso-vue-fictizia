@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <h2>Precio: {{ price | minor(5) | currency }}</h2>
+        <h2>Precio: {{ price | minor(10) | currency }}</h2>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.filter('minor', function (value, count) {
+            return value - count
+        })
+
+        Vue.filter('currency', function (value) {
+            return value + ' €'
+        })
+
+        const app = new Vue({
+            el: '#my-app',
+            data: {
+                price: 2000
+            }
+        })
+    </script>
+</body>
+
+</html>

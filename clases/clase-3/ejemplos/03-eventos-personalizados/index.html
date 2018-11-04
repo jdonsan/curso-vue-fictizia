@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <my-counter @on-counter="onCounter" @on-five="(five) => other = five" @on-alert="onAlert"></my-counter>
+        <my-counter @on-counter="onCounter" @on-five="(five) => other = five" @on-alert="onAlert2"></my-counter>
+        <span>{{ counterRoot }} - {{ other }}</span>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        Vue.component('my-counter', {
+            template: '<button @click="onAdd">{{ counter }}</button>',
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                onAdd() {
+                    this.counter += 1
+                    this.$emit('on-counter', this.counter)
+                    this.$emit('on-five', 5)
+                    this.$emit('on-alert')
+                }
+            }
+        })
+        
+        const app = new Vue({
+            el: '#my-app',
+            data: {
+                counterRoot: 0,
+                other: 0
+            },
+            methods: {
+                onCounter(counter) {
+                    this.counterRoot = counter
+                },
+                onAlert() {
+                    alert('Hola')
+                },
+                onAlert2() {
+                    alert('Hola 2')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

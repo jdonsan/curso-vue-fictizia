@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <h1> {{ message }}</h1>
+        <h1> {{ mesassageReversed }}</h1>
+        <h1> {{ getMesassageReversed() }}</h1>
+
+        <h2>{{ name }} {{ lastname }}</h2>
+        <h2>{{ fullName }}</h2>
+
+        <input type="text" v-model="country">
+        <ul>
+            <li v-for="(country, index) in countriesFiltrered" :value="index">{{ country }}</li>
+        </ul>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#my-app',
+            data() {
+                return {
+                    message: 'Hola que tal estáis?',
+                    name: 'Jose',
+                    lastname: 'Dongil',
+                    fullName2: 'Jose Dongil',
+                    country: '',
+                    countries: ['Alemania', 'USA', 'UK']
+                }
+            },
+
+            // Definimos observadores
+            watch: {
+                name() {
+                    this.fullName2 = this.name + ' ' + this.lastname
+                },
+                lastname() {
+                    this.fullName2 = this.name + ' ' + this.lastname
+                }
+            },
+
+            // Definimos propiedades computadas
+            computed: {
+                // Computada solo con get
+                mesassageReversed() {
+                    return this.message.split('').reverse().join('')
+                },
+
+                // Computada 
+                fullName: {
+                    set(newFullName) {
+                        const names = newFullName.split(' ')
+                        this.name = names[0]
+                        this.lastname = names[names.length - 1]
+                    },
+                    get() {
+                        return this.name + ' ' + this.lastname
+                    }
+                },
+
+                // Las computed nos ayudan para crear filtros
+                countriesFiltrered() {
+                    return (this.country === '') 
+                        ? this.countries 
+                        : this.countries.filter(country => country.toUpperCase().includes(this.country.toUpperCase()))
+                }
+            },
+
+            // Los métodos también computan pero no cachean
+            methods: {
+                getMesassageReversed() {
+                    return this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

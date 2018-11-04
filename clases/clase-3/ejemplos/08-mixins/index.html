@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <my-form-user></my-form-user>
+        <my-form-promo></my-form-promo>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        const myValidationMixin = {
+            data() {
+                return {
+                    isEmpty: false,
+                    value: ''
+                }
+            },
+            created() {
+                console.log('Me ejecuto en mixin')
+            },
+            methods: {
+                onValidate() {
+                    this.isEmpty = this.value === ''
+                },
+                other() {}
+            }
+        }
+        Vue.component('my-form-user', {
+            mixins: [myValidationMixin],
+            template: `
+                <form>
+                    <label>Nombre de usuario</label>
+                    <input type="text"  v-model="value" @keyup="onValidate" />
+                </form>
+            `
+        })
+
+        Vue.component('my-form-promo', {
+            mixins: [myValidationMixin],
+            template: `
+                <form>
+                    <label>Edad</label>
+                    <input type="number" v-model="value" @keyup="onValidate" />
+                </form>
+            `,
+            data() {
+                return {
+                    value: '2'
+                }
+            },
+            created() {
+                console.log('Me ejecuto en component')
+            },
+            methods: {
+                onValidate() {
+                    alert(this.value)
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#my-app'
+        })
+    </script>
+</body>
+
+</html>

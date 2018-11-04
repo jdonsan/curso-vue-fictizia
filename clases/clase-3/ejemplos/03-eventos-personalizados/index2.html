@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <my-searchbox @on-search="onSearch"></my-searchbox>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+
+    <script>
+        Vue.component('my-input', {
+            template: '<input type="text" @keyup="onKeyup" v-model="key" />',
+            data() {
+                return {
+                    key: ''
+                }
+            },
+            methods: {
+                onKeyup() {
+                    this.$emit('on-keyup', this.key)
+                }
+            }
+        })
+
+        Vue.component('my-searchbox', {
+            template: `
+                <div>
+                    <my-input @on-keyup="onKeyup"></my-input>
+                    <button @click="onClick">Buscar</button>
+                </div>
+            `,
+            data() {
+                return {
+                    mySearch: ''
+                }
+            },
+            methods: {
+                onKeyup(key) {
+                    this.mySearch = key
+                },
+
+                onClick() {
+                    this.$emit('on-search', this.mySearch)
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#my-app',
+            data() {
+                return {
+                    mySearchKey: ''
+                }
+            },
+            methods: {
+                onSearch(search) {
+                    alert(search)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

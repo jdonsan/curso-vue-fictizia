@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <form>
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" v-model="name">
+                <span>{{ name }}</span>
+            </div>
+
+            <div>
+                <label for="description">Description</label>
+                <textarea id="description" cols="30" rows="10" v-model="description"></textarea>
+                <span>{{ description }}</span>
+            </div>
+
+            <div>
+                <label for="registred">Registred</label>
+                <input type="checkbox" name="registred" id="registred" v-model="isRegistred">
+                <span>{{ isRegistred }}</span>
+            </div>
+
+            <div>
+                <label for="colors">Colors</label>
+                <label for="red">Red</label>
+                <input type="checkbox" name="colors" value="red" id="red" v-model="colors">
+                <label for="blue">Blue</label>
+                <input type="checkbox" name="colors" value="blue" id="blue" v-model="colors">
+                <label for="green">Green</label>
+                <input type="checkbox" name="colors" value="green" id="green" v-model="colors">
+                <span>{{ colors }}</span>
+            </div>
+
+            <div>
+                <label for="genre">Genre</label>
+                <label for="feminine">Feminine</label>
+                <input type="radio" name="feminine" id="feminine" value="feminine" v-model="genre">
+                <label for="masculine">Masculine</label>
+                <input type="radio" name="masculine" id="masculine" value="masculine" v-model="genre">
+                <span>{{ genre }}</span>
+            </div>
+
+            <div>
+                <label for="country">Country</label>
+                <select name="country" id="country" v-model="country">
+                    <option>España</option>
+                    <option>Francia</option>
+                    <option>Portugal</option>
+                </select>
+                <span>{{ country }}</span>
+            </div>
+
+            <div>
+                <label for="country">Country</label>
+                <select name="country" id="country" v-model="countriesSelected" multiple>
+                    <option v-for="country in countries" :value="country.value">{{ country.text }}</option>
+                </select>
+                <span>{{ countriesSelected }}</span>
+            </div>
+
+            <div>
+                <label for="country">Country</label>
+                <select name="country" id="country" v-model="country">
+                    <option v-for="(country, index) in countries" :value="index">{{ country.text }}</option>
+                </select>
+                <span>{{ country }}</span>
+            </div>
+
+            <div>
+                <label for="years">Years</label>
+                <input type="number" name="years" id="years" v-model.number="years">
+                <span>{{ typeof years }}</span>
+            </div>
+
+            <div>
+                <label for="observations">Observations</label>
+                <input type="text" name="observations" id="observations" v-model.trim="observations">
+                <span>{{ observations }}</span>
+            </div>
+        </form>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#my-app',
+            data() {
+                return {
+                    name: '',
+                    description: '',
+                    isRegistred: true,
+                    colors: [],
+                    genre: 'feminine',
+                    country: '',
+                    countriesSelected: [],
+                    countries: [
+                        { value: 'spain', text: 'España' },
+                        { value: 'france', text: 'Francia' },
+                        { value: 'portugal', text: 'Portugal' },
+                    ],
+                    years: 0,
+                    observations: ''
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
