@@ -1,9 +1,8 @@
-Vue.component('my-button', {
+const MyButtonLocal = {
+    name: 'my-button-local',
+
     template: `
-        <div>
-            <button @click="onAdd">{{ count }}</button>
-            <my-button-local></my-button-local>
-        </div>
+        <button @click="onAdd">{{ count }}</button>
     `,
 
     data() {
@@ -17,13 +16,19 @@ Vue.component('my-button', {
             this.count += 1
         }
     }
-})
+}
 
-Vue.component('my-button-local', {
-
+Vue.component('my-button', {
     template: `
-        <button @click="onAdd">{{ count }}</button>
+        <div>
+            <button @click="onAdd">{{ count }}</button>
+            <my-button-local></my-button-local>
+        </div>
     `,
+
+    components: {
+        MyButtonLocal
+    },
 
     data() {
         return {
