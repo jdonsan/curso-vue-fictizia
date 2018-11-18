@@ -1,0 +1,19 @@
+{
+  "name": "01-npm",
+  "version": "0.0.1",
+  "description": "Esto es nuestro primer ejemplo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "fictizia",
+    "node",
+    "npm"
+  ],
+  "author": "Jose",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

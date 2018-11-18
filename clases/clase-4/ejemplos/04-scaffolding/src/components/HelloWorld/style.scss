@@ -1,0 +1,12 @@
+$color-primary: blue;
+$color-basic: white;
+
+.hello-world {
+    background: $color-primary;
+    width: 256px;
+    height: 256px;
+
+    h1 {
+        color: $color-basic;
+    }
+}
