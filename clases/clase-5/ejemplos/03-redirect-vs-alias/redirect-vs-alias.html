@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <router-view></router-view>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js'></script>
+    <script>
+        const B = {
+            template: `<h1> Hola B</h1>` 
+        }
+
+        const C = {
+            template: `<h1> Hola C</h1>` 
+        }
+
+        const router = new VueRouter({
+            routes: [
+                // redirect
+                {
+                    path: '/a', redirect: '/b'
+                },
+                {
+                    path: '/b', component: B
+                },
+                {
+                    path: '/c', component: C, alias: '/d'
+                }
+            ]
+        })
+
+        const app = new Vue({
+            el: '#my-app',
+            router
+        })
+    </script>
+</body>
+</html>
