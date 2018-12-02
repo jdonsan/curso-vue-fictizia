@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="my-app">
+        <my-component-1></my-component-1>
+        <my-component-2></my-component-2>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+        const store = {
+            debug: true,
+            state: {
+                message: 'Este es el mensaje compartido'
+            },
+            setMessageAction(value) {
+                this.debug && console.log('Estoy en la accion de set')
+                this.state.message = value
+            },
+            clearMessageAction() {
+                this.debug && console.log('Estoy en la acción de clear')
+                this.state.message = ''
+            }
+        }
+
+        const myComponent1 = {
+            name: 'my-component-1',
+            template: `
+            <div>
+                <p>{{ private.message }}</p>
+                <p>{{ shared.message }}</p>
+                <button @click="setMessage">Cambia mensaje compartido</button>
+            </div>
+        `,
+            data() {
+                return {
+                    private: {
+                        message: 'Este es el mensaje privado del compo 1'
+                    },
+                    shared: store.state
+                }
+            },
+            methods: {
+                setMessage() {
+                    store.setMessageAction('Este es un nuevo mensaje compartido')
+                }
+            }
+        }
+
+        const myComponent2 = {
+            name: 'my-component-2',
+            template: `
+                <div>
+                    <p>{{ private.message }}</p>
+                    <p>{{ shared.message }}</p>
+                    <button @click="clearMessage">Limpia mensaje compartido</button>
+                </div>
+            `,
+            data() {
+                return {
+                    private: {
+                        message: 'Este es el mensaje privado del compo 2'
+                    },
+                    shared: store.state
+                }
+            },
+            methods: {
+                clearMessage() {
+                    store.clearMessageAction()
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: '#my-app',
+            components: {
+                myComponent1,
+                myComponent2
+            }
+        })
+    </script>
+</body>
+
+</html>

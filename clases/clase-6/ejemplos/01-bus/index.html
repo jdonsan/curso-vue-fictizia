@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="my-app">
+        <my-ping></my-ping>
+        <my-pong></my-pong>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js'></script>
+    <script>
+    const bus = new Vue()
+    const myPing = {
+        name: 'my-ping',
+        template: `
+            <div>
+                <button @click="send">Hace ping</button>
+                <label>Estos son los pong {{ checks }}</label>
+            </div>
+        `,
+        data() {
+            return {
+                checks: 0
+            }
+        },
+        mounted() {
+            bus.$on('pong', (value) => {
+                this.checks += value
+            })
+        },
+        methods: {
+            send() {
+                bus.$emit('ping', 1)
+            }
+        }
+    }
+
+     const myPong = {
+        name: 'my-pong',
+        template: `
+            <div>
+                <button @click="send">Hace pong</button>
+                <label>Estos son los ping {{ checks }}</label>
+            </div>
+        `,
+        data() {
+            return {
+                checks: 0
+            }
+        },
+        mounted() {
+            bus.$on('ping', (value) => {
+                this.checks += value
+            })
+        },
+        methods: {
+            send() {
+                bus.$emit('pong', 1)
+            }
+        }
+    }
+
+    const app = new Vue({
+        el: '#my-app',
+        components: {
+            myPing,
+            myPong
+        }
+    })
+    </script>
+</body>
+</html>

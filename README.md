@@ -30,8 +30,8 @@ Teoría y recursos
 | [Clase 3](clases/clase-3/README.md) | [Clase 3](clases/clase-3/RECURSOS.md) | 
 | [Clase 4](clases/clase-4/README.md) | [Clase 4](clases/clase-4/RECURSOS.md) |
 | [Clase 5](clases/clase-5/README.md) | [Clase 5](clases/clase-5/RECURSOS.md) |
-| Clase 6                             | Disponible el 02/12/2018              |
-| CLase 7                             | Disponible el 16/12/2018              | 
+| [Clase 6](clases/clase-6/README.md) | [Clase 6](clases/clase-6/RECURSOS.md) |
+| Clase 7                             | Disponible el 16/12/2018              | 
 
 Temario
 =================
